@@ -38,23 +38,32 @@ public class ConfigurationManager  implements IConfigurationManager{
         BufferedReader br = new BufferedReader(new FileReader(filename));
         String currentLine;
         currentLine = br.readLine();
-        if(currentLine != "victims"){
+        if(currentLine == null){
+            return;
+        }
+        if(!currentLine.equals("victims")){
             System.err.println("no victims found, please insure that atleast one victim is in config file");
             return;
         }
         currentLine = br.readLine();
-        while (currentLine != "ccVictims" || currentLine != "bccVictims" || currentLine != null){
+        while (currentLine != null && !currentLine.equals("ccVictims") && !currentLine.equals("bccVictims")){
             victims.add(new Person(currentLine));
             currentLine = br.readLine();
         }
-        if(currentLine == "ccVictims"){
+        if(currentLine == null){
+            return;
+        }
+        if(currentLine.equals("ccVictims")){
             currentLine = br.readLine();
-            while (currentLine != "bccVictims" || currentLine != null){
+            while (currentLine != null && !currentLine.equals("bccVictims")){
                 ccVictims.add(new Person(currentLine));
                 currentLine = br.readLine();
             }
         }
-        if(currentLine == "bccVictims"){
+        if(currentLine == null){
+            return;
+        }
+        if(currentLine.equals("bccVictims")){
             currentLine = br.readLine();
             while (currentLine != null){
                 bccVictims.add(new Person(currentLine));
@@ -71,7 +80,7 @@ public class ConfigurationManager  implements IConfigurationManager{
         StringBuilder currentMessage = new StringBuilder();
         currentLine = br.readLine();
         while (currentLine != null) {
-            while (currentLine != separator || currentLine != null) {
+            while (currentLine != null && !currentLine.equals(separator)) {
                 currentMessage.append(currentLine + "\r\n");
                 currentLine = br.readLine();
             }
