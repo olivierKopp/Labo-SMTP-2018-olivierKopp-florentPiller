@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * this class allow the generation of prank message and groups of victims
+ */
 public class PrankGenerator {
     private ConfigurationManager configurationManager;
 
@@ -16,6 +18,13 @@ public class PrankGenerator {
         configurationManager = config;
     }
 
+    /**
+     * this method create a List of prank, chosing for each prank :
+     *  - the message
+     *  - the groups
+     *  - the sender inside the group
+     * @return
+     */
     public List<Prank> generatePranks(){
         List<Prank> pranks = new ArrayList<Prank>();
         List<String> messages = new ArrayList<String>(configurationManager.getMessages());
@@ -36,6 +45,13 @@ public class PrankGenerator {
         return pranks;
     }
 
+    /**
+     * this method create groups composed by random victims
+     * each groups need to have at least 3 victims in it
+     * @param victims list of victims
+     * @param numberOfGroups number of group to be created
+     * @return
+     */
     public List<Group> generateGroups(List<Person> victims, int numberOfGroups){
         if(numberOfGroups > victims.size()){
             System.err.println("You must have more victims than numbre of groups");

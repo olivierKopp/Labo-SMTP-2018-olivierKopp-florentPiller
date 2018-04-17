@@ -1,5 +1,9 @@
 package protocol;
 
+/**
+ * this class store all supported command for smtp protocol
+ * @author olivier kopp, florent piller
+ */
 public class SMTPProtocol {
     public final static String CMD_EHLO = "EHLO ";
     public final static String CMD_MAIL_FROM = "MAIL FROM: ";

@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * this class implement the configuration manager, which is used to manage all config :
+ *  - smtp server address/port
+ *  - number of groups that will be pranked
+ *  - list of all kind of victims(normal/CC/BCC)
+ *
+ * @author olivier kopp, florent piller
+ */
+
 public class ConfigurationManager  implements IConfigurationManager{
 
     String serverAddress;
@@ -17,7 +26,7 @@ public class ConfigurationManager  implements IConfigurationManager{
     List<Person> bccVictims = null;
     List<String> messages = null;
 
-    private final static String separator = "==";
+    private final static String separator = "=="; //separator for message
 
     public ConfigurationManager() throws IOException {
         loadAddresses("./config/victimsConfig.utf8");
@@ -26,7 +35,7 @@ public class ConfigurationManager  implements IConfigurationManager{
     }
 
     /**
-     * load addresses and store them in victims,
+     * load addresses and store them in the differents victims lists
      * @param filename
      * @return
      * @throws IOException
@@ -73,6 +82,12 @@ public class ConfigurationManager  implements IConfigurationManager{
         br.close();
     }
 
+    /**
+     * Load all message in the config file and store them in a list
+     * @param filename
+     * @return
+     * @throws IOException
+     */
     public List<String> loadMessages(String filename) throws IOException {
         ArrayList<String> retList = new ArrayList<String>();
         BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -90,6 +105,20 @@ public class ConfigurationManager  implements IConfigurationManager{
         }
         br.close();
         return retList;
+    }
+
+    /**
+     * load properties from configSMTP file and store them locally
+     * @param filename
+     * @throws IOException
+     */
+    public void loadProperties(String filename) throws IOException {
+        FileInputStream fs = new FileInputStream(filename);
+        Properties p = new Properties();
+        p.load(fs);
+        this.serverAddress = p.getProperty("serverAddress");
+        this.serverPort = Integer.parseInt(p.getProperty("serverPort"));
+        this.numberOfGroups = Integer.parseInt(p.getProperty("numberOfGroups"));
     }
 
     public List<Person> getVictims() {
@@ -120,12 +149,4 @@ public class ConfigurationManager  implements IConfigurationManager{
         return serverPort;
     }
 
-    public void loadProperties(String filename) throws IOException {
-        FileInputStream fs = new FileInputStream(filename);
-        Properties p = new Properties();
-        p.load(fs);
-        this.serverAddress = p.getProperty("serverAddress");
-        this.serverPort = Integer.parseInt(p.getProperty("serverPort"));
-        this.numberOfGroups = Integer.parseInt(p.getProperty("numberOfGroups"));
-    }
 }
