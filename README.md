@@ -23,7 +23,7 @@ it contains the messages you want to send with the following syntax:
 
 Subject: the subjet of the prank 
 
-THe prank you want to send 
+The prank you want to send 
 
 == //the end of the message token
 
