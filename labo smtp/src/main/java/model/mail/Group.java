@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * this class represents a group of Person
  * @author olivier kopp, florent piller
  */
 

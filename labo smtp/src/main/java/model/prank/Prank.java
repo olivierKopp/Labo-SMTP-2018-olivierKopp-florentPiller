@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * this class represent a prank that can be send by a client
  * @author olivier kopp, florent piller
  */
 

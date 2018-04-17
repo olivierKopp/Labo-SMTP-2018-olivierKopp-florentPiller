@@ -5,6 +5,10 @@ import model.mail.Person;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author olivier kopp, florent piller
+ */
+
 public interface IConfigurationManager {
 
     void loadAddresses(String filename) throws IOException;

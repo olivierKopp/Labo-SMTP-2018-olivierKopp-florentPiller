@@ -7,6 +7,11 @@ import java.io.*;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+/**
+ * this class implement a client of the prank application
+ *
+ * @author olivier kopp, florent piller
+ */
 public class ClientImpl implements IClient {
 
     private static final Logger LOG = Logger.getLogger(ClientImpl.class.getName());
@@ -22,6 +27,11 @@ public class ClientImpl implements IClient {
         this.serverPort = serverPort;
     }
 
+    /**
+     * this method send a prank according to configuration using the smtp protocol
+     * @param p
+     * @throws IOException
+     */
     public void sendPrank(Prank p) throws IOException {
         if(p.getSender() == null || p.getReceivers().size() == 0){
             LOG.info("a prank need a sender and at least a receiver\n");
@@ -81,11 +91,20 @@ public class ClientImpl implements IClient {
 
     }
 
+    /**
+     * this method send a messaage to the server
+     * @param message
+     */
     public void sendMessage(String message){
         pw.print(message);
         pw.flush();
     }
 
+    /**
+     * this method connect the client to the smtp server configured in the configSMTP file
+     * and send the ehlo command
+     * @throws IOException
+     */
     public void connect() throws IOException {
         socket = new Socket(serverAddress, serverPort);
         br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -102,6 +121,10 @@ public class ClientImpl implements IClient {
         while (!currentLine.startsWith("250 "));
     }
 
+    /**
+     * this method is used to disconnect the client by sending the command BYE
+     * @throws IOException
+     */
     public void disconnect() throws IOException {
         sendMessage(SMTPProtocol.CMD_BYE);
         socket.close();
