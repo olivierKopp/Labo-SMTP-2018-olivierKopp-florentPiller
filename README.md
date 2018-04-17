@@ -7,7 +7,7 @@ This project is a client-server application that send forged email to a mock ser
 ## How to to setup a mock server
 
 All you have to do is run the docker build form the docker directory-
-In order to start the docker, use the commande docker run -d -p 25:25  -p 8282:8282 mockmock in docker.
+In order to start the docker, use the commande docker run -d -p 25:25  -p 8282:8282 nameOfTheImage .
 You can now send pranks and see the reslut in a web broser at the adress 192.168.99.100:8282.
 
 ## How to use the application
