@@ -10,6 +10,6 @@ import java.io.IOException;
 
 public interface IClient {
 
-    public void sendPrank(Prank p) throws IOException;
+    void sendPrank(Prank p) throws IOException;
 
 }

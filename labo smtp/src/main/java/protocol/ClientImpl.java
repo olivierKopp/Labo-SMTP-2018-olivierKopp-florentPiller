@@ -22,7 +22,7 @@ public class ClientImpl implements IClient {
     private String serverAddress;
     private int serverPort;
 
-    public ClientImpl(String serverAddress, int serverPort) throws IOException {
+    public ClientImpl(String serverAddress, int serverPort) {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
     }

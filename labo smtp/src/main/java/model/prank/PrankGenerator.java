@@ -54,7 +54,7 @@ public class PrankGenerator {
      */
     public List<Group> generateGroups(List<Person> victims, int numberOfGroups){
         if(numberOfGroups > victims.size()){
-            System.err.println("You must have more victims than numbre of groups");
+            System.err.println("You must have more victims than groups");
             return null;
         }
         List<Person> victimsCopy = new ArrayList<Person>(victims);
