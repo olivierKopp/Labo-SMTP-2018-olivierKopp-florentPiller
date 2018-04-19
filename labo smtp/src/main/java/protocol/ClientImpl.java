@@ -40,21 +40,21 @@ public class ClientImpl implements IClient {
         connect();
 
         sendMessage(SMTPProtocol.CMD_MAIL_FROM + p.getSender().getAddress() + "\r\n");
-        LOG.info(br.readLine());
+        if(!checkSuccess(br.readLine())) return;
 
         for (Person person : p.getReceivers()){
             sendMessage(SMTPProtocol.CMD_RCPT_TO + person.getAddress() + "\r\n");
-            LOG.info(br.readLine());
+            if(!checkSuccess(br.readLine())) return;
         }
 
         for (Person person : p.getReceiversCC()){
             sendMessage(SMTPProtocol.CMD_RCPT_TO + person.getAddress() + "\r\n");
-            LOG.info(br.readLine());
+            if(!checkSuccess(br.readLine())) return;
         }
 
         for (Person person : p.getReceiversBCC()){
             sendMessage(SMTPProtocol.CMD_RCPT_TO + person.getAddress() + "\r\n");
-            LOG.info(br.readLine());
+            if(!checkSuccess(br.readLine())) return;
         }
 
         sendMessage(SMTPProtocol.CMD_DATA);
@@ -130,5 +130,14 @@ public class ClientImpl implements IClient {
         socket.close();
         br.close();
         pw.close();
+    }
+
+    public boolean checkSuccess(String s){
+        LOG.info(s);
+        if(!s.startsWith("250")){
+            LOG.info("SMTP error, message not send");
+            return false;
+        }
+        return true;
     }
 }
